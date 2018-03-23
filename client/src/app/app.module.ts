@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -16,6 +17,8 @@ import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { ErrorComponent } from './error/error.component';
+
+import { reducers } from '../ngrx/reducers';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -30,18 +33,12 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
   bootstrap: [ App ],
   declarations: [
     App,
     ErrorComponent
   ],
-  /**
-   * Import Angular's modules.
-   */
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,11 +47,9 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, {
       useHash: true,
       preloadingStrategy: PreloadAllModules
-    })
+    }),
+    StoreModule.forRoot(reducers)
   ],
-  /**
-   * Expose our Services and Providers into Angular's dependency injection.
-   */
   providers: [
     environment.ENV_PROVIDERS,
     APP_PROVIDERS

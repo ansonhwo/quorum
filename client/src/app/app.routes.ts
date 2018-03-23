@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 
 export const ROUTES: Routes = [{
-   path: '', redirectTo: 'app', pathMatch: 'full'
+   path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
   {
-    path: 'app',   loadChildren: './layout/layout.module#LayoutModule'
+    path: 'dashboard',   loadChildren: './layout/layout.module#LayoutModule'
   },
   {
     path: 'login', loadChildren: './login/login.module#LoginModule'
