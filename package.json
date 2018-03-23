@@ -1,0 +1,15 @@
+{
+  "name": "Quorum",
+  "version": "0.0.1",
+  "description": "A job advertisement data aggregator",
+  "main": "index.js",
+  "dependencies": {
+    "serverless-client-s3": "git+https://github.com/nharris85/serverless-client-s3.git#serverless_1.0_beta_compatibility"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "author": "Anson Wong <ahwong19@gmail.com>",
+  "license": "MIT"
+}
