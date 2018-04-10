@@ -1,49 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "noEmit": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
-    "strictNullChecks": false,
     "lib": [
       "dom",
-      "es6"
+      "es2015"
     ],
     "baseUrl": "./src",
     "paths": {
-      "@angular/*": ["node_modules/@angular/*"]
+      "@app/env": [
+        "environments/environment"
+      ]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "hammerjs",
-      "node",
-      "source-map",
-      "uglify-js",
-      "webpack"
-    ]
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5"
   },
-  "exclude": [
-    "dist"
-  ],
   "include": [
-    "node_modules/ng-autosize/**/*.ts",
-    "node_modules/ng2-datetime/ng2-datetime.ts",
-    "**/*.ts"
+    "src/**/*.ts"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts",
+    "src/**/__tests__/*.ts"
+  ],
   "compileOnSave": false,
-  "buildOnSave": false,
   "atom": {
     "rewriteTsconfig": false
   }

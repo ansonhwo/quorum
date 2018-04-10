@@ -1,22 +1,31 @@
-import * as mainActions from '../actions';
+import { Action, combineReducers } from '@ngrx/store';
+import * as MainActions from '../actions/main';
 
-export type Action = mainActions.All;
+export type Action = MainActions.All;
 
-export interface State {
-  loading: boolean
+export interface Notification {
+  id: string;
+  title: string;
+  content: string;
 };
 
-const initialState: State = {
-  loading: false
+export interface MainState {
+  notifications: [Notification]
 };
 
-export function mainReducer(state = initialState, action: Action) {
+export function notificationReducer(state = [], action) {
   switch (action.type) {
-    case mainActions.ShowLoader:
-      return { ...state, loading: true };
-    case mainActions.HideLoader:
-      return { ...state, loading: false };
+    case MainActions.ADD_NOTIFICATION:
+      return [ ...state, ...action.payload ];
+    case MainActions.DELETE_NOTIFICATION:
+      return state.filter(notification => notification.id !== action.payload.id);
+    case MainActions.RESET:
+      return [];
     default:
       return state;
   }
 }
+
+export const mainReducers = combineReducers({
+  notifications: notificationReducer
+});

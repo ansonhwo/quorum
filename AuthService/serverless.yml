@@ -1,0 +1,77 @@
+service: Quorum-AuthService
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-webpack
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  users_table: "quorum_users_${self:custom.stage}"
+  dynamodb:
+    start:
+      migrate: true
+  webpackIncludeModules: true
+
+provider:
+  environment: ${file(env.yml):${self:custom.stage}}
+  name: aws
+  runtime: nodejs8.10
+  region: ${self:provider.environment.REGION}
+  profile: ahwongcc
+  stage: local
+  iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:DescribeTable"
+          - "dynamodb:Query"
+          - "dynamodb:Scan"
+          - "dynamodb:GetItem"
+          - "dynamodb:PutItem"
+          - "dynamodb:UpdateItem"
+          - "dynamodb:DeleteItem"
+          - "dynamodb:BatchWriteItem"
+        Resource: "arn:aws:dynamodb:${self:provider.environment.REGION}"
+      - Effect: "Allow"
+        Action:
+          - "cognito-sync:*"
+          - "cognito-identity:*"
+        Resource: "arn:aws:cognito-identity:*:*:*"
+      - Effect: "Allow"
+        Action:
+          - "cognito-idp:*"
+        Resource: "arn:aws:cognito-idp:*:*:*"
+      - Effect: "Allow"
+        Action:
+          - "logs:*"
+        Resource: "arn:aws:logs:*:*:*"
+
+functions:
+  CreateUser:
+    handler: handler.createUser
+    events:
+      - http:
+          path: user/create
+          method: post
+          cors: true
+          integration: lambda
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:${self:provider.environment.AWS_ACCT_ID}:userpool/${self:provider.environment.IDENTITY_POOL_ID}
+            claims: 
+              - email
+
+resources:
+  Resources:
+    QuorumUsers:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: ${self:custom.users_table}
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2

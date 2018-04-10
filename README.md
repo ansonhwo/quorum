@@ -1,4 +1,4 @@
 # quorum
-A public job advertisement data compiler
+Ionic testing
 
-This project utilizes Angular 5, Amazon AWS, and the Serverless CLI.
+This project utilizes Ionic v3, Angular 5 & Typescript, Amazon AWS, and the Serverless CLI.
