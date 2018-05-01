@@ -6,13 +6,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { CovalentLayoutModule, CovalentStepsModule } from '@covalent/core';
-import { 
-  MatButtonModule, 
-  MatIconModule, 
-  MatListModule, 
-  MatMenuModule, 
-  MatSidenavModule
-} from '@angular/material';
 import { reducers, metaReducers } from '../ngrx/reducers';
 import { CustomRouterStateSerializer } from '../ngrx/router-state';
 
@@ -32,11 +25,6 @@ import { AppRoutingModule } from './app.routing';
     CovalentLayoutModule,
     CovalentStepsModule,
     EffectsModule.forRoot([]),
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatSidenavModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' })
   ],

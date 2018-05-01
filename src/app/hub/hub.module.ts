@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatToolbarModule  } from '@angular/material';
+import { MaterialModule } from '../mat/material.module';
 
 import { HubComponent } from './hub.component';
 import { HubRoutingModule } from './hub-routing.module';
@@ -7,7 +7,7 @@ import { HubRoutingModule } from './hub-routing.module';
 @NgModule({
   imports: [
     HubRoutingModule,
-    MatToolbarModule
+    MaterialModule
   ],
   declarations: [
     HubComponent

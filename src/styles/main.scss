@@ -1,21 +1,43 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
+// @import '../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 
 // Define a custom typography config that overrides the font-family
 // or any typography level.
 $typography: mat-typography-config(
-  $font-family: 'Roboto, monospace',
-  $headline: mat-typography-level(32px, 48px, 700)
+  $font-family: 'Roboto',
+  $headline: mat-typography-level(32px, 48px, 500)
+);
+
+$myst-at-sea: (
+  50: #f7faf3,
+  100: #eaf2db,
+  200: #d3e2b6,
+  300: #acc184,
+  400: #88a257,
+  500: #628224,
+  600: #415d0c,
+  700: #253900,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text
+  )
 );
 
 @include mat-core($typography); // $typography is an **optional** argument for the mat-core
 
-$primary: mat-palette($mat-orange, 800, 100, 900);
-$accent:  mat-palette($mat-light-blue, 600, 100, 900);
+$primary: mat-palette($mat-light-blue);
+$accent:  mat-palette($mat-orange, 600, 100, 900);
 
 $warn:    mat-palette($mat-red, 600, 100, 900);
 
-$theme: mat-light-theme($primary, $accent, $warn);
+$theme: mat-dark-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 @include covalent-theme($theme, $typography); // $typography is an **optional** argument for the covalent-theme
